@@ -2,12 +2,14 @@ import { Calendar, Clock, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { EventSectionData } from "@/constant/WeddingData";
 
 export const EventSection = () => {
   const { ref, isVisible } = useScrollAnimation();
   
-  const handleOpenMaps = (location: string) => {
-    window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`, '_blank');
+  const handleOpenMaps = (mapUrl: string) => {
+    // window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`, '_blank');
+    window.open(mapUrl, '_blank');
   };
 
   return (
@@ -42,7 +44,7 @@ export const EventSection = () => {
                   <Calendar className="w-5 h-5 text-muted-foreground mt-1 flex-shrink-0" />
                   <div>
                     <p className="font-semibold text-foreground">Tanggal</p>
-                    <p className="text-muted-foreground font-sans">Rabu, 25 Desember 2024</p>
+                    <p className="text-muted-foreground font-sans">{EventSectionData.akad.date}</p>
                   </div>
                 </div>
                 
@@ -50,7 +52,7 @@ export const EventSection = () => {
                   <Clock className="w-5 h-5 text-muted-foreground mt-1 flex-shrink-0" />
                   <div>
                     <p className="font-semibold text-foreground">Waktu</p>
-                    <p className="text-muted-foreground font-sans">08.00 - 10.00 WIB</p>
+                    <p className="text-muted-foreground font-sans">{EventSectionData.akad.time}</p>
                   </div>
                 </div>
                 
@@ -59,15 +61,14 @@ export const EventSection = () => {
                   <div>
                     <p className="font-semibold text-foreground">Lokasi</p>
                     <p className="text-muted-foreground font-sans">
-                      Masjid Al-Ikhlas<br />
-                      Jl. Merdeka No. 123, Jakarta Pusat
+                      {EventSectionData.akad.location}
                     </p>
                   </div>
                 </div>
               </div>
               
               <Button 
-                onClick={() => handleOpenMaps('Masjid Al-Ikhlas Jl. Merdeka No. 123, Jakarta Pusat')}
+                onClick={() => handleOpenMaps(EventSectionData.akad.mapUrl)}
                 variant="outline"
                 className="w-full mt-6 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
               >
@@ -93,7 +94,7 @@ export const EventSection = () => {
                   <Calendar className="w-5 h-5 text-muted-foreground mt-1 flex-shrink-0" />
                   <div>
                     <p className="font-semibold text-foreground">Tanggal</p>
-                    <p className="text-muted-foreground font-sans">Rabu, 25 Desember 2024</p>
+                    <p className="text-muted-foreground font-sans">{EventSectionData.resepsi.date}</p>
                   </div>
                 </div>
                 
@@ -101,7 +102,7 @@ export const EventSection = () => {
                   <Clock className="w-5 h-5 text-muted-foreground mt-1 flex-shrink-0" />
                   <div>
                     <p className="font-semibold text-foreground">Waktu</p>
-                    <p className="text-muted-foreground font-sans">11.00 - 14.00 WIB</p>
+                    <p className="text-muted-foreground font-sans">{EventSectionData.resepsi.time}</p>
                   </div>
                 </div>
                 
@@ -110,15 +111,14 @@ export const EventSection = () => {
                   <div>
                     <p className="font-semibold text-foreground">Lokasi</p>
                     <p className="text-muted-foreground font-sans">
-                      Grand Ballroom Hotel Mulia<br />
-                      Jl. Asia Afrika No. 8, Jakarta Pusat
+                      {EventSectionData.resepsi.location}
                     </p>
                   </div>
                 </div>
               </div>
               
               <Button 
-                onClick={() => handleOpenMaps('Grand Ballroom Hotel Mulia Jl. Asia Afrika No. 8, Jakarta Pusat')}
+                onClick={() => handleOpenMaps(EventSectionData.resepsi.mapUrl)}
                 variant="outline"
                 className="w-full mt-6 border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground"
               >

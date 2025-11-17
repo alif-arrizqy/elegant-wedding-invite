@@ -1,7 +1,6 @@
-import groomImage from "@/assets/groom.jpg";
-import brideImage from "@/assets/bride.jpg";
 import { Heart } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { CoupleSectionData } from "@/constant/WeddingData";
 
 export const CoupleSection = () => {
   const { ref, isVisible } = useScrollAnimation();
@@ -27,8 +26,8 @@ export const CoupleSection = () => {
             <div className="relative inline-block">
               <div className="w-64 h-80 mx-auto rounded-lg overflow-hidden shadow-elegant">
                 <img 
-                  src={groomImage} 
-                  alt="Alexander - Mempelai Pria" 
+                  src={CoupleSectionData.groom.img.src} 
+                  alt={CoupleSectionData.groom.img.alt}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -37,14 +36,21 @@ export const CoupleSection = () => {
             
             <div className="space-y-3">
               <h3 className="font-serif text-3xl font-bold text-foreground">
-                Alexander Jonathan
+                {CoupleSectionData.groom.name}
               </h3>
               <p className="text-muted-foreground font-sans">
-                Putra dari Bapak Robert & Ibu Maria
+                {CoupleSectionData.groom.detail}
               </p>
-              <p className="text-sm text-muted-foreground font-sans italic">
-                "Cinta sejati adalah ketika dua jiwa menjadi satu"
-              </p>
+              {CoupleSectionData.groom.instagram && (
+                <a 
+                  href={CoupleSectionData.groom.instagram} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-sans text-sm"
+                >
+                  Instagram
+                </a>
+              )}
             </div>
           </div>
           
@@ -66,8 +72,8 @@ export const CoupleSection = () => {
             <div className="relative inline-block">
               <div className="w-64 h-80 mx-auto rounded-lg overflow-hidden shadow-elegant">
                 <img 
-                  src={brideImage} 
-                  alt="Isabella - Mempelai Wanita" 
+                  src={CoupleSectionData.bride.img.src} 
+                  alt={CoupleSectionData.bride.img.alt} 
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -76,14 +82,21 @@ export const CoupleSection = () => {
             
             <div className="space-y-3">
               <h3 className="font-serif text-3xl font-bold text-foreground">
-                Isabella Rose
+                {CoupleSectionData.bride.name}
               </h3>
               <p className="text-muted-foreground font-sans">
-                Putri dari Bapak Michael & Ibu Catherine
+                {CoupleSectionData.bride.detail}
               </p>
-              <p className="text-sm text-muted-foreground font-sans italic">
-                "Bersama kita lebih kuat, bersama kita lebih indah"
-              </p>
+              {CoupleSectionData.bride.instagram && (
+                <a 
+                  href={CoupleSectionData.bride.instagram} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-sans text-sm"
+                >
+                  Instagram
+                </a>
+              )}
             </div>
           </div>
         </div>

@@ -15,7 +15,19 @@ interface TimeLeft {
 }
 
 export const HeroSection = ({ onOpenInvitation }: HeroSectionProps) => {
+  const [guestName, setGuestName] = useState<string>("");
   const weddingDate = HeroSectionData.countDownWeddingDate.getTime();
+  
+  // Get guest name dari URL query parameter
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const guest = searchParams.get('guest');
+    if (guest) {
+      // Convert URL-encoded name (john-noel -> John Noel)
+      const decodedName = decodeURIComponent(guest).replace(/-/g, ' ', ).replace(/\b\w/g, c => c.toUpperCase());
+      setGuestName(decodedName);
+    }
+  }, []);
   
   const calculateTimeLeft = (): TimeLeft => {
     const now = new Date().getTime();
@@ -92,7 +104,23 @@ export const HeroSection = ({ onOpenInvitation }: HeroSectionProps) => {
               <div className="text-xs md:text-sm font-sans text-foreground/70">Detik</div>
             </div>
           </div>
-          
+
+          {/* Welcome to guest - Dynamic based on query parameter */}
+          {guestName && (
+            <div className="mb-8 space-y-3">
+              <p className="text-lg md:text-xl font-sans text-foreground/80">
+                Kepada:
+              </p>
+              <p className="text-3xl md:text-4xl font-serif font-bold text-foreground">
+                {guestName}
+              </p>
+              <p className="text-lg md:text-xl font-sans text-foreground/70 leading-relaxed">
+                Dengan hormat kami mengundang Anda untuk menghadiri<br />
+                acara pernikahan kami.
+              </p>
+            </div>
+          )}
+
           <Button
             onClick={onOpenInvitation}
             size="lg"

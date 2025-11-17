@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import heroBackground from "@/assets/hero-background.jpg";
+import { HeroSectionData } from "@/constant/WeddingData";
 
 interface HeroSectionProps {
   onOpenInvitation: () => void;
@@ -14,7 +15,7 @@ interface TimeLeft {
 }
 
 export const HeroSection = ({ onOpenInvitation }: HeroSectionProps) => {
-  const weddingDate = new Date("2024-12-25T00:00:00").getTime();
+  const weddingDate = HeroSectionData.countDownWeddingDate.getTime();
   
   const calculateTimeLeft = (): TimeLeft => {
     const now = new Date().getTime();
@@ -56,13 +57,13 @@ export const HeroSection = ({ onOpenInvitation }: HeroSectionProps) => {
           </p>
           
           <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-foreground mb-6 leading-tight">
-            Alexander & Isabella
+            {HeroSectionData.groomName} & {HeroSectionData.brideName}
           </h1>
           
           <div className="w-24 h-px bg-accent mx-auto mb-8" />
           
           <p className="text-xl md:text-2xl font-sans text-foreground/70 mb-8">
-            25 Desember 2024
+            {HeroSectionData.weddingDate}
           </p>
           
           <div className="grid grid-cols-4 gap-4 max-w-lg mx-auto mb-12">

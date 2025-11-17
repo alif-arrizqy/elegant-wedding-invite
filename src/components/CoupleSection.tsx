@@ -1,10 +1,18 @@
 import groomImage from "@/assets/groom.jpg";
 import brideImage from "@/assets/bride.jpg";
 import { Heart } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export const CoupleSection = () => {
+  const { ref, isVisible } = useScrollAnimation();
+  
   return (
-    <section className="py-20 px-4 bg-gradient-romantic">
+    <section 
+      ref={ref as React.RefObject<HTMLElement>}
+      className={`py-20 px-4 bg-gradient-romantic transition-all duration-1000 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      }`}
+    >
       <div className="max-w-6xl mx-auto">
         <h2 className="font-serif text-4xl md:text-5xl font-bold text-center text-foreground mb-4">
           Mempelai

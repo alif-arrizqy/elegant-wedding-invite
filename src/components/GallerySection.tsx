@@ -4,6 +4,7 @@ import gallery3 from "@/assets/gallery-3.jpg";
 import gallery4 from "@/assets/gallery-4.jpg";
 import gallery5 from "@/assets/gallery-5.jpg";
 import gallery6 from "@/assets/gallery-6.jpg";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const galleryImages = [
   { src: gallery1, alt: "Romantic couple holding hands" },
@@ -15,8 +16,15 @@ const galleryImages = [
 ];
 
 export const GallerySection = () => {
+  const { ref, isVisible } = useScrollAnimation();
+  
   return (
-    <section className="py-20 px-4 bg-gradient-romantic">
+    <section 
+      ref={ref as React.RefObject<HTMLElement>}
+      className={`py-20 px-4 bg-gradient-romantic transition-all duration-1000 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      }`}
+    >
       <div className="max-w-6xl mx-auto">
         <h2 className="font-serif text-4xl md:text-5xl font-bold text-center text-foreground mb-4">
           Galeri Kami

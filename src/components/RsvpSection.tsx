@@ -7,39 +7,14 @@ import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
 import { Send, Heart } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-
-interface Wish {
-  id: number;
-  name: string;
-  message: string;
-  timestamp: Date;
-}
+import { useWishes } from "@/hooks/useWishes";
 
 export const RsvpSection = () => {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
-  const [wishes, setWishes] = useState<Wish[]>([
-    {
-      id: 1,
-      name: "Sarah & Michael",
-      message: "Selamat menempuh hidup baru! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah. ❤️",
-      timestamp: new Date(Date.now() - 86400000)
-    },
-    {
-      id: 2,
-      name: "Jessica",
-      message: "Congratulations! Wishing you both a lifetime of love and happiness together! 💕",
-      timestamp: new Date(Date.now() - 172800000)
-    },
-    {
-      id: 3,
-      name: "Ryan & Lisa",
-      message: "Bahagia selalu untuk kalian berdua. May your love story be filled with beautiful moments!",
-      timestamp: new Date(Date.now() - 259200000)
-    }
-  ]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { ref, isVisible } = useScrollAnimation();
+  const { wishes, isLoading, error, submitWish } = useWishes();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,21 +26,17 @@ export const RsvpSection = () => {
     
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    const newWish: Wish = {
-      id: Date.now(),
-      name: name.trim(),
-      message: message.trim(),
-      timestamp: new Date()
-    };
-    
-    setWishes([newWish, ...wishes]);
-    toast.success("Ucapan berhasil dikirim! Terima kasih ❤️");
-    setName("");
-    setMessage("");
-    setIsSubmitting(false);
+    try {
+      await submitWish(name, message);
+      toast.success("Ucapan berhasil dikirim! Terima kasih ❤️");
+      setName("");
+      setMessage("");
+    } catch (err) {
+      toast.error("Gagal mengirim ucapan. Silakan coba lagi.");
+      console.error(err);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const formatTimestamp = (date: Date) => {
@@ -149,35 +120,53 @@ export const RsvpSection = () => {
             <Heart className="w-5 h-5 text-primary fill-primary" />
           </h3>
           
+          {isLoading && (
+            <div className="text-center py-8">
+              <p className="text-muted-foreground font-sans">Memuat ucapan...</p>
+            </div>
+          )}
+          
+          {error && (
+            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-4">
+              <p className="text-sm text-yellow-800">{error}</p>
+            </div>
+          )}
+          
           <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
-            {wishes.map((wish, index) => (
-              <Card 
-                key={wish.id} 
-                className="p-6 shadow-soft border-border/50 hover:shadow-elegant transition-all duration-300 animate-fade-in"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-romantic flex items-center justify-center">
-                    <span className="text-primary-foreground font-serif font-semibold">
-                      {wish.name.charAt(0).toUpperCase()}
-                    </span>
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between mb-2">
-                      <h4 className="font-sans font-semibold text-foreground">
-                        {wish.name}
-                      </h4>
-                      <span className="text-xs text-muted-foreground">
-                        {formatTimestamp(wish.timestamp)}
+            {wishes.length === 0 ? (
+              <div className="text-center py-8">
+                <p className="text-muted-foreground font-sans">Belum ada ucapan. Jadilah yang pertama!</p>
+              </div>
+            ) : (
+              wishes.map((wish, index) => (
+                <Card 
+                  key={wish.id} 
+                  className="p-6 shadow-soft border-border/50 hover:shadow-elegant transition-all duration-300 animate-fade-in"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-romantic flex items-center justify-center">
+                      <span className="text-primary-foreground font-serif font-semibold">
+                        {wish.name.charAt(0).toUpperCase()}
                       </span>
                     </div>
-                    <p className="text-muted-foreground font-sans leading-relaxed">
-                      {wish.message}
-                    </p>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-2">
+                        <h4 className="font-sans font-semibold text-foreground">
+                          {wish.name}
+                        </h4>
+                        <span className="text-xs text-muted-foreground">
+                          {formatTimestamp(wish.timestamp)}
+                        </span>
+                      </div>
+                      <p className="text-muted-foreground font-sans leading-relaxed">
+                        {wish.message}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </Card>
-            ))}
+                </Card>
+              ))
+            )}
           </div>
         </div>
       </div>

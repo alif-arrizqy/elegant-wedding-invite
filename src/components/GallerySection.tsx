@@ -1,19 +1,7 @@
-import gallery1 from "@/assets/gallery-1.jpg";
-import gallery2 from "@/assets/gallery-2.jpg";
-import gallery3 from "@/assets/gallery-3.jpg";
-import gallery4 from "@/assets/gallery-4.jpg";
-import gallery5 from "@/assets/gallery-5.jpg";
-import gallery6 from "@/assets/gallery-6.jpg";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { GallerySectionData } from "@/constant/WeddingData";
 
-const galleryImages = [
-  { src: gallery1, alt: "Romantic couple holding hands" },
-  { src: gallery2, alt: "Wedding couple laughing together" },
-  { src: gallery3, alt: "Bride's bouquet" },
-  { src: gallery4, alt: "First dance" },
-  { src: gallery5, alt: "Wedding rings" },
-  { src: gallery6, alt: "Walking hand in hand" },
-];
+
 
 export const GallerySection = () => {
   const { ref, isVisible } = useScrollAnimation();
@@ -34,7 +22,7 @@ export const GallerySection = () => {
         </p>
         
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {galleryImages.map((image, index) => (
+          {GallerySectionData.map((image, index) => (
             <div 
               key={index}
               className="relative aspect-square overflow-hidden rounded-lg shadow-soft hover:shadow-elegant transition-all hover:scale-105 cursor-pointer group"

@@ -1,4 +1,5 @@
 import { Heart } from "lucide-react";
+import { FooterSectionData } from "@/constant/WeddingData";
 
 export const Footer = () => {
   return (
@@ -7,22 +8,22 @@ export const Footer = () => {
         <div className="flex items-center justify-center gap-2">
           <Heart className="w-5 h-5 text-primary fill-primary" />
           <p className="font-serif text-2xl font-bold text-foreground">
-            Alexander & Isabella
+            {FooterSectionData.coupleNames}
           </p>
           <Heart className="w-5 h-5 text-primary fill-primary" />
         </div>
         
         <p className="text-muted-foreground font-sans italic">
-          "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya"
+          "{FooterSectionData.quote}"
         </p>
         
         <p className="text-sm text-muted-foreground font-sans">
-          QS. Ar-Rum: 21
+          {FooterSectionData.quoteSource}
         </p>
         
         <div className="pt-8 border-t border-border">
           <p className="text-sm text-muted-foreground font-sans">
-            © 2024 Alexander & Isabella. Made with love.
+            © {new Date().getFullYear()} {FooterSectionData.coupleNames}. Made with love.
           </p>
         </div>
       </div>

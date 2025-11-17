@@ -1,14 +1,22 @@
 import { Calendar, Clock, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export const EventSection = () => {
+  const { ref, isVisible } = useScrollAnimation();
+  
   const handleOpenMaps = (location: string) => {
     window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`, '_blank');
   };
 
   return (
-    <section className="py-20 px-4 bg-background">
+    <section 
+      ref={ref as React.RefObject<HTMLElement>}
+      className={`py-20 px-4 bg-background transition-all duration-1000 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      }`}
+    >
       <div className="max-w-6xl mx-auto">
         <h2 className="font-serif text-4xl md:text-5xl font-bold text-center text-foreground mb-4">
           Acara Pernikahan

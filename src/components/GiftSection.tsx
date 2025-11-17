@@ -3,8 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
 import { Copy, Gift, MapPin } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export const GiftSection = () => {
+  const { ref, isVisible } = useScrollAnimation();
   const [copied, setCopied] = useState(false);
   const accountNumber = "1234567890";
 
@@ -16,7 +18,12 @@ export const GiftSection = () => {
   };
 
   return (
-    <section className="py-20 px-4 bg-gradient-romantic">
+    <section 
+      ref={ref as React.RefObject<HTMLElement>}
+      className={`py-20 px-4 bg-gradient-romantic transition-all duration-1000 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      }`}
+    >
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <div className="inline-block p-4 bg-gold-light rounded-full mb-6">

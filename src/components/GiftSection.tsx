@@ -1,13 +1,13 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
 import { Copy, Gift, MapPin } from "lucide-react";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { ScrollReveal } from "@/components/ScrollReveal";
 import { GiftSectionData } from "@/constant/WeddingData";
 
 export const GiftSection = () => {
-  const { ref, isVisible } = useScrollAnimation();
   const [copied, setCopied] = useState<string | null>(null);
 
   const handleCopyAccount = (accountNumber: string, accountHolder: string) => {
@@ -26,29 +26,32 @@ export const GiftSection = () => {
   };
 
   return (
-    <section 
-      ref={ref as React.RefObject<HTMLElement>}
-      className={`py-20 px-4 bg-gradient-romantic transition-all duration-1000 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-      }`}
-    >
+    <section className="py-20 px-4 bg-gradient-romantic">
       <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12">
-          <div className="inline-block p-4 bg-gold-light rounded-full mb-6">
-            <Gift className="w-8 h-8 text-accent" />
+        <ScrollReveal>
+          <div className="text-center mb-12">
+            <motion.div 
+              className="inline-block p-4 bg-gold-light rounded-full mb-6"
+              animate={{ rotate: [0, -10, 10, -10, 0] }}
+              transition={{ duration: 3, repeat: Infinity, repeatDelay: 5 }}
+            >
+              <Gift className="w-8 h-8 text-accent" />
+            </motion.div>
+            <h2 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-4">
+              Hadiah Pernikahan
+            </h2>
+            <p className="text-muted-foreground font-sans">
+              Doa restu Anda adalah hadiah terindah bagi kami. Namun tanpa mengurangi rasa hormat, bagi Anda yang ingin memberikan tanda kasih untuk mempelai dapat melalui:
+            </p>
           </div>
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Hadiah Pernikahan
-          </h2>
-          <p className="text-muted-foreground font-sans">
-            Doa restu Anda adalah hadiah terindah bagi kami. Namun tanpa mengurangi rasa hormat, bagi Anda yang ingin memberikan tanda kasih untuk mempelai dapat melalui:
-          </p>
-        </div>
+        </ScrollReveal>
         
         {/* Bank Cards - 2 Columns */}
         <div className="grid md:grid-cols-2 gap-8 mb-8">
           {/* Bank 1 */}
-          <Card className="p-8 shadow-soft hover:shadow-elegant transition-all bg-card border-border/50">
+          <ScrollReveal delay={0.2} direction="left">
+            <motion.div whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}>
+              <Card className="p-8 shadow-soft hover:shadow-elegant transition-all bg-card border-border/50 h-full">
             <div className="text-center space-y-6">
               <div className="inline-block p-4 bg-rose-light rounded-full">
                 <svg 
@@ -91,10 +94,14 @@ export const GiftSection = () => {
                 {copied === GiftSectionData.bank1.accountNumber ? "Tersalin!" : "Salin Nomor Rekening"}
               </Button>
             </div>
-          </Card>
+              </Card>
+            </motion.div>
+          </ScrollReveal>
 
           {/* Bank 2 */}
-          <Card className="p-8 shadow-soft hover:shadow-elegant transition-all bg-card border-border/50">
+          <ScrollReveal delay={0.3} direction="right">
+            <motion.div whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}>
+              <Card className="p-8 shadow-soft hover:shadow-elegant transition-all bg-card border-border/50 h-full">
             <div className="text-center space-y-6">
               <div className="inline-block p-4 bg-rose-light rounded-full">
                 <svg 
@@ -137,11 +144,15 @@ export const GiftSection = () => {
                 {copied === GiftSectionData.bank2.accountNumber ? "Tersalin!" : "Salin Nomor Rekening"}
               </Button>
             </div>
-          </Card>
+              </Card>
+            </motion.div>
+          </ScrollReveal>
         </div>
         
         {/* Shipping Address - Full Width */}
-        <Card className="p-8 shadow-soft hover:shadow-elegant transition-all bg-card border-border/50">
+        <ScrollReveal delay={0.4}>
+          <motion.div whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}>
+            <Card className="p-8 shadow-soft hover:shadow-elegant transition-all bg-card border-border/50">
           <div className="text-center space-y-6">
             <div className="inline-block p-4 bg-sage-light rounded-full">
               <MapPin className="w-6 h-6 text-secondary" />
@@ -178,7 +189,9 @@ export const GiftSection = () => {
               Mohon sertakan nama pengirim
             </p>
           </div>
-        </Card>
+            </Card>
+          </motion.div>
+        </ScrollReveal>
       </div>
     </section>
   );

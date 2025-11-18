@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -6,14 +7,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
 import { Send, Heart } from "lucide-react";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { ScrollReveal } from "@/components/ScrollReveal";
 import { useWishes } from "@/hooks/useWishes";
 
 export const RsvpSection = () => {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { ref, isVisible } = useScrollAnimation();
   const { wishes, isLoading, error, submitWish } = useWishes();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -51,21 +51,22 @@ export const RsvpSection = () => {
   };
 
   return (
-    <section 
-      ref={ref as React.RefObject<HTMLElement>}
-      className={`py-20 px-4 bg-background transition-all duration-1000 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-      }`}
-    >
+    <section className="py-20 px-4 bg-background">
       <div className="max-w-4xl mx-auto">
-        <h2 className="font-serif text-4xl md:text-5xl font-bold text-center text-foreground mb-4">
-          Ucapan & Doa
-        </h2>
-        <p className="text-center text-muted-foreground mb-12 font-sans">
-          Kirimkan ucapan dan doa terbaik untuk kami
-        </p>
+        <ScrollReveal>
+          <h2 className="font-serif text-4xl md:text-5xl font-bold text-center text-foreground mb-4">
+            Ucapan & Doa
+          </h2>
+        </ScrollReveal>
         
-        <Card className="p-8 shadow-elegant border-border/50 mb-12">
+        <ScrollReveal delay={0.2}>
+          <p className="text-center text-muted-foreground mb-12 font-sans">
+            Kirimkan ucapan dan doa terbaik untuk kami
+          </p>
+        </ScrollReveal>
+        
+        <ScrollReveal delay={0.3}>
+          <Card className="p-8 shadow-elegant border-border/50 mb-12">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
               <Label htmlFor="name" className="text-foreground font-sans">
@@ -111,14 +112,26 @@ export const RsvpSection = () => {
               )}
             </Button>
           </form>
-        </Card>
+          </Card>
+        </ScrollReveal>
 
-        <div className="space-y-4">
-          <h3 className="font-serif text-2xl font-semibold text-center text-foreground mb-6 flex items-center justify-center gap-2">
-            <Heart className="w-5 h-5 text-primary fill-primary" />
-            Ucapan dari Tamu
-            <Heart className="w-5 h-5 text-primary fill-primary" />
-          </h3>
+        <ScrollReveal delay={0.4}>
+          <div className="space-y-4">
+            <h3 className="font-serif text-2xl font-semibold text-center text-foreground mb-6 flex items-center justify-center gap-2">
+              <motion.div
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <Heart className="w-5 h-5 text-primary fill-primary" />
+              </motion.div>
+              Ucapan dari Tamu
+              <motion.div
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              >
+                <Heart className="w-5 h-5 text-primary fill-primary" />
+              </motion.div>
+            </h3>
           
           {isLoading && (
             <div className="text-center py-8">
@@ -168,7 +181,8 @@ export const RsvpSection = () => {
               ))
             )}
           </div>
-        </div>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

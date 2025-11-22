@@ -30,7 +30,7 @@ const Index = () => {
             <CoupleSection />
           </div>
           <EventSection />
-          <GallerySection />
+          {/* <GallerySection /> */}
           <RsvpSection />
           <GiftSection />
           <Footer />

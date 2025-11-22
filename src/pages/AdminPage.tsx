@@ -1,14 +1,15 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card } from '@/components/ui/card';
 import { toast } from 'sonner';
-import { Copy, Download, MessageCircle, Plus, Trash2, Edit2, Search, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Copy, Download, MessageCircle, Plus, Trash2, Edit2, Search, ChevronLeft, ChevronRight, Upload } from 'lucide-react';
 import { useGuests } from '@/hooks/useGuests';
 import {generateInvitationUrl, generateSlug} from '@/services/guestService';
 import {generateInvitationMessage, generateWhatsAppLinkWithPhone,copyToClipboard,
 } from '@/services/messageService';
+import * as XLSX from 'xlsx';
 
 export const AdminPage = () => {
   const { guests, isLoading, error, createGuest, removeGuest, refetch } = useGuests();
@@ -17,7 +18,9 @@ export const AdminPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [isImporting, setIsImporting] = useState(false);
   const itemsPerPage = 10;
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Filter guests based on search query
   const filteredGuests = useMemo(() => {
@@ -126,6 +129,118 @@ export const AdminPage = () => {
     toast.success('File CSV berhasil diunduh');
   };
 
+  const handleImportExcel = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!file.name.endsWith('.xlsx') && !file.name.endsWith('.xls')) {
+      toast.error('File harus berformat Excel (.xlsx atau .xls)');
+      return;
+    }
+
+    setIsImporting(true);
+
+    try {
+      const fileReader = new FileReader();
+      
+      fileReader.onload = async (event) => {
+        try {
+          const data = event.target?.result;
+          if (!data) {
+            throw new Error('Gagal membaca file');
+          }
+
+          // Parse Excel file
+          const workbook = XLSX.read(data, { type: 'binary' });
+          const sheetName = workbook.SheetNames[0];
+          const worksheet = workbook.Sheets[sheetName];
+          
+          // Convert to JSON
+          const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 }) as unknown[][];
+
+          if (jsonData.length === 0) {
+            toast.error('File Excel kosong');
+            setIsImporting(false);
+            return;
+          }
+
+          // Find the 'nama' column index (case-insensitive)
+          const headerRow = jsonData[0];
+          const namaIndex = headerRow.findIndex(
+            (cell: unknown) => cell && String(cell).toLowerCase().trim() === 'nama'
+          );
+
+          if (namaIndex === -1) {
+            toast.error('Kolom "nama" tidak ditemukan di file Excel');
+            setIsImporting(false);
+            return;
+          }
+
+          // Extract names from the 'nama' column (skip header row)
+          const names: string[] = [];
+          for (let i = 1; i < jsonData.length; i++) {
+            const row = jsonData[i];
+            if (row && row[namaIndex]) {
+              const name = String(row[namaIndex]).trim();
+              if (name) {
+                names.push(name);
+              }
+            }
+          }
+
+          if (names.length === 0) {
+            toast.error('Tidak ada nama yang ditemukan di kolom "nama"');
+            setIsImporting(false);
+            return;
+          }
+
+          // Create guests for each name
+          let successCount = 0;
+          let errorCount = 0;
+
+          for (const name of names) {
+            try {
+              await createGuest(name);
+              successCount++;
+            } catch (err) {
+              errorCount++;
+              console.error(`Gagal menambahkan ${name}:`, err);
+            }
+          }
+
+          // Show result
+          if (successCount > 0) {
+            toast.success(`Berhasil mengimport ${successCount} tamu${errorCount > 0 ? ` (${errorCount} gagal)` : ''}`);
+          } else {
+            toast.error('Gagal mengimport semua tamu');
+          }
+
+          // Reset file input
+          if (fileInputRef.current) {
+            fileInputRef.current.value = '';
+          }
+        } catch (err) {
+          console.error('Error processing Excel file:', err);
+          toast.error('Gagal memproses file Excel');
+        } finally {
+          setIsImporting(false);
+        }
+      };
+
+      fileReader.onerror = () => {
+        toast.error('Gagal membaca file');
+        setIsImporting(false);
+      };
+
+      fileReader.readAsBinaryString(file);
+    } catch (err) {
+      console.error('Error importing Excel:', err);
+      toast.error('Gagal mengimport file Excel');
+      setIsImporting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background py-12 px-4">
       <div className="max-w-6xl mx-auto">
@@ -163,14 +278,39 @@ export const AdminPage = () => {
               </div>
             </div>
 
-            <Button
-              type="submit"
-              className="w-fit bg-primary hover:bg-primary/90 text-primary-foreground"
-              disabled={isSubmitting}
-            >
-              <Plus className="w-4 h-4 mr-2" />
-              {isSubmitting ? 'Menambahkan...' : 'Tambah Tamu'}
-            </Button>
+            <div className="flex gap-4 flex-wrap">
+              <Button
+                type="submit"
+                className="w-fit bg-primary hover:bg-primary/90 text-primary-foreground"
+                disabled={isSubmitting}
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                {isSubmitting ? 'Menambahkan...' : 'Tambah Tamu'}
+              </Button>
+
+              {/* Import Excel Button */}
+              <div className="relative">
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept=".xlsx,.xls"
+                  onChange={handleImportExcel}
+                  className="hidden"
+                  id="excel-import"
+                  disabled={isImporting}
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="border-primary text-primary hover:bg-primary/10"
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={isImporting}
+                >
+                  <Upload className="w-4 h-4 mr-2" />
+                  {isImporting ? 'Mengimport...' : 'Import Excel'}
+                </Button>
+              </div>
+            </div>
           </form>
         </Card>
 

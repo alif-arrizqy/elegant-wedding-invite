@@ -11,15 +11,16 @@ import brideImage from "@/assets/bride.jpg";
 export const HeroSectionData = {
     groomName: "Haikal",
     brideName: "Dania",
-    weddingDate: "01 Januari 2026",
+    weddingDate: "04 Januari 2026",
     countDownWeddingDate: new Date("2026-01-01T09:00:00"),
 };
 
 // Mempelai section data
 export const CoupleSectionData = {
+
     groom: {
-        name: "Muhamad Haikal Husein",
-        detail: "Putra kedua dari Bapak Budi & Ibu Siti",
+        name: "Muhamad Husein Haikal",
+        detail: "Putra kedua dari Bapak Yusril & Ibu Sartikah",
         instagram: "https://www.instagram.com/hy_call/",
         img: {
             src: groomImage,
@@ -28,7 +29,7 @@ export const CoupleSectionData = {
     },
     bride: {
         name: "Dania",
-        detail: "Putri pertama dari Bapak Ahmad & Ibu Lina",
+        detail: "Putri pertama dari Bapak Daung & Ibu Darsiti",
         instagram: "https://www.instagram.com/daniaa228/",
         img: {
             src: brideImage,
@@ -40,15 +41,15 @@ export const CoupleSectionData = {
 // Acara section data
 export const EventSectionData = {
     akad: {
-        date: "Senin, 01 Januari 2026",
+        date: "Minggu, 04 Januari 2026",
         time: "09.00 - 10.00 WIB",
-        location: "Masjid Agung Kota Wisata",
+        location: "Dojo Kyoto Kota Wisata",
         mapUrl: "https://maps.app.goo.gl/MEZ8ZSgHpXEchAUK8",
     },
     resepsi: {
-        date: "Senin, 01 Januari 2026",
+        date: "Minggu, 04 Januari 2026",
         time: "11.00 - 14.00 WIB",
-        location: "Gedung Serbaguna Kota Wisata",
+        location: "Dojo Kyoto Kota Wisata",
         mapUrl: "https://maps.app.goo.gl/af29vwpFhaynW7BX8",
     },
 };
@@ -85,14 +86,14 @@ export const WishSectionData = [
 // Gift section data
 export const GiftSectionData = {
     bank1: {
-        bankName: "Bank Central Asia (BCA)",
-        accountNumber: "1234567890",
-        accountHolder: "John Doe",
+        bankName: "Mandiri)",
+        accountNumber: "1330030371306",
+        accountHolder: "Dania",
     },
     bank2: {
-        bankName: "Bank Mandiri",
-        accountNumber: "0987654321",
-        accountHolder: "Jane Doe",
+        bankName: "Bank Syariah Indonesia (BSI)",
+        accountNumber: "7139725877",
+        accountHolder: "Muhamad Husein Haical",
     },
     shippingAddress: {
         recipientName: "Haikal",

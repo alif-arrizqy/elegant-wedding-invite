@@ -44,7 +44,7 @@ export const Footer = () => {
               © {new Date().getFullYear()} {coupleNames}. Made with love.
             </p>
             {/* Watermark */}
-            <p className="text-[10px] text-foreground/30 hover:text-foreground/60 transition-all duration-300 font-sans cursor-default">
+            <p className="text-[14px] text-foreground/30 hover:text-foreground/60 transition-all duration-300 font-sans cursor-default">
               Designed by <a href="https://instagram.com/alif_arrizqy" target="_blank" rel="noopener noreferrer" className="font-medium hover:text-primary transition-colors">@alif_arrizqy</a>
             </p>
           </div>

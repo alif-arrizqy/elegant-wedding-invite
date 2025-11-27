@@ -44,13 +44,13 @@ export const EventSectionData = {
         date: "Minggu, 04 Januari 2026",
         time: "09.00 - 10.00 WIB",
         location: "Dojo Kyoto Kota Wisata",
-        mapUrl: "https://maps.app.goo.gl/MEZ8ZSgHpXEchAUK8",
+        mapUrl: "https://share.google/8TQpDnWfdtCDeW8V5",
     },
     resepsi: {
         date: "Minggu, 04 Januari 2026",
         time: "11.00 - 14.00 WIB",
         location: "Dojo Kyoto Kota Wisata",
-        mapUrl: "https://maps.app.goo.gl/af29vwpFhaynW7BX8",
+        mapUrl: "https://share.google/8TQpDnWfdtCDeW8V5",
     },
 };
 
@@ -86,7 +86,7 @@ export const WishSectionData = [
 // Gift section data
 export const GiftSectionData = {
     bank1: {
-        bankName: "Mandiri)",
+        bankName: "Mandiri",
         accountNumber: "1330030371306",
         accountHolder: "Dania",
     },

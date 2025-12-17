@@ -97,7 +97,7 @@ export const GiftSectionData = {
     },
     shippingAddress: {
         recipientName: "Haikal",
-        address: "Jl. Merpati No. 45, Jakarta Selatan, 12345",
+        address: "Vila Nusa Indah 3 Blok KE 2/10, Bojong Kulur, Gunung Putri, Bogor",
     }
 };
 

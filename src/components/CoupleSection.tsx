@@ -23,7 +23,7 @@ export const CoupleSection = () => {
           {/* Groom */}
           <ScrollReveal delay={0.3} direction="left">
             <div className="flex flex-col items-center text-center space-y-6 w-full md:w-auto">
-              <div className="relative">
+              {/* <div className="relative">
                 <div className="relative w-72 h-[360px] rounded-lg overflow-hidden shadow-elegant">
                   <img 
                     src={CoupleSectionData.groom.img.src} 
@@ -32,7 +32,7 @@ export const CoupleSection = () => {
                   />
                 </div>
                 <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-32 h-1 bg-accent rounded-full" />
-              </div>
+              </div> */}
               
               <div className="space-y-3 pt-4 max-w-xs">
                 <h3 className="font-serif text-3xl font-bold text-foreground">
@@ -84,7 +84,7 @@ export const CoupleSection = () => {
           {/* Bride */}
           <ScrollReveal delay={0.4} direction="right">
             <div className="flex flex-col items-center text-center space-y-6 w-full md:w-auto">
-              <div className="relative">
+              {/* <div className="relative">
                 <div className="relative w-72 h-[360px] rounded-lg overflow-hidden shadow-elegant">
                   <img 
                     src={CoupleSectionData.bride.img.src} 
@@ -93,7 +93,7 @@ export const CoupleSection = () => {
                   />
                 </div>
                 <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-32 h-1 bg-accent rounded-full" />
-              </div>
+              </div> */}
               
               <div className="space-y-3 pt-4 max-w-xs">
                 <h3 className="font-serif text-3xl font-bold text-foreground">

@@ -29,7 +29,8 @@ export const useWishes = () => {
 
                 // Combine dengan data dummy jika database kosong
                 if (fetchedWishes.length === 0) {
-                    setWishes([...WishSectionData]);
+                    // setWishes([...WishSectionData]);
+                    setWishes([]);
                 } else {
                     setWishes(fetchedWishes);
                 }

@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { Send, Heart } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { useWishes } from "@/hooks/useWishes";
+import { DecorativeDivider } from "@/components/DecorativeDivider";
 
 export const RsvpSection = () => {
   const [name, setName] = useState("");
@@ -51,23 +52,37 @@ export const RsvpSection = () => {
   };
 
   return (
-    <section className="py-20 px-4 bg-background">
-      <div className="max-w-4xl mx-auto">
+    <section className="py-24 px-4 bg-gradient-romantic relative overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-primary rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-40 h-40 bg-accent rounded-full blur-3xl" />
+      </div>
+      
+      <div className="max-w-4xl mx-auto relative z-10">
         <ScrollReveal>
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-center text-foreground mb-4">
-            Ucapan & Doa
-          </h2>
+          <div className="text-center mb-8">
+            <h2 className="font-script text-5xl md:text-6xl lg:text-7xl text-foreground mb-4">
+              Ucapan & Doa
+            </h2>
+            <div className="w-32 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto" />
+          </div>
         </ScrollReveal>
         
         <ScrollReveal delay={0.2}>
-          <p className="text-center text-muted-foreground mb-12 font-sans">
+          <p className="text-center text-muted-foreground mb-12 font-sans text-lg leading-relaxed">
             Kirimkan ucapan dan doa terbaik untuk kami
           </p>
         </ScrollReveal>
         
+        <DecorativeDivider variant="heart" className="mb-12" />
+        
         <ScrollReveal delay={0.3}>
-          <Card className="p-8 shadow-elegant border-border/50 mb-12">
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <Card className="elegant-card p-8 md:p-10 border-border/50 mb-12 relative overflow-hidden">
+            {/* Decorative corner accents */}
+            <div className="absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-primary/20" />
+            <div className="absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-primary/20" />
+          <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
             <div className="space-y-2">
               <Label htmlFor="name" className="text-foreground font-sans">
                 Nama
@@ -117,7 +132,7 @@ export const RsvpSection = () => {
 
         <ScrollReveal delay={0.4}>
           <div className="space-y-4">
-            <h3 className="font-serif text-2xl font-semibold text-center text-foreground mb-6 flex items-center justify-center gap-2">
+            <h3 className="font-script text-3xl md:text-4xl font-semibold text-center text-foreground mb-8 flex items-center justify-center gap-3">
               <motion.div
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}

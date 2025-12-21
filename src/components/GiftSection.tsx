@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { Copy, Gift, MapPin } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { GiftSectionData } from "@/constant/WeddingData";
+import { DecorativeDivider } from "@/components/DecorativeDivider";
 
 export const GiftSection = () => {
   const [copied, setCopied] = useState<string | null>(null);
@@ -26,32 +27,47 @@ export const GiftSection = () => {
   };
 
   return (
-    <section className="py-20 px-4 bg-gradient-romantic">
-      <div className="max-w-4xl mx-auto">
+    <section className="py-24 px-4 bg-background relative overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute inset-0 opacity-3">
+        <div className="absolute top-40 left-20 w-40 h-40 bg-accent rounded-full blur-3xl" />
+        <div className="absolute bottom-40 right-20 w-32 h-32 bg-primary rounded-full blur-3xl" />
+      </div>
+      
+      <div className="max-w-4xl mx-auto relative z-10">
         <ScrollReveal>
           <div className="text-center mb-12">
             <motion.div 
-              className="inline-block p-4 bg-gold-light rounded-full mb-6"
-              animate={{ rotate: [0, -10, 10, -10, 0] }}
+              className="inline-block p-5 bg-gold-light rounded-full mb-6 shadow-elegant border-2 border-accent/20"
+              animate={{ 
+                rotate: [0, -10, 10, -10, 0],
+                scale: [1, 1.05, 1]
+              }}
               transition={{ duration: 3, repeat: Infinity, repeatDelay: 5 }}
             >
-              <Gift className="w-8 h-8 text-accent" />
+              <Gift className="w-10 h-10 text-accent" />
             </motion.div>
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-4">
+            <h2 className="font-script text-5xl md:text-6xl lg:text-7xl text-foreground mb-4">
               Hadiah Pernikahan
             </h2>
-            <p className="text-muted-foreground font-sans">
+            <div className="w-32 h-0.5 bg-gradient-to-r from-transparent via-accent to-transparent mx-auto mb-6" />
+            <p className="text-muted-foreground font-sans text-lg leading-relaxed max-w-2xl mx-auto">
               Doa restu Anda adalah hadiah terindah bagi kami. Namun tanpa mengurangi rasa hormat, bagi Anda yang ingin memberikan tanda kasih untuk mempelai dapat melalui:
             </p>
           </div>
         </ScrollReveal>
         
+        <DecorativeDivider variant="floral" className="mb-12" />
+        
         {/* Bank Cards - 2 Columns */}
         <div className="grid md:grid-cols-2 gap-8 mb-8">
           {/* Bank 1 */}
           <ScrollReveal delay={0.2} direction="left">
-            <motion.div whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}>
-              <Card className="p-8 shadow-soft hover:shadow-elegant transition-all bg-card border-border/50 h-full">
+            <motion.div whileHover={{ y: -5, transition: { duration: 0.3 } }}>
+              <Card className="elegant-card p-8 md:p-10 hover:shadow-elegant transition-all bg-card border-border/50 h-full relative overflow-hidden">
+                {/* Decorative corner accents */}
+                <div className="absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-primary/20" />
+                <div className="absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-primary/20" />
             <div className="text-center space-y-6">
               <div className="inline-block p-4 bg-rose-light rounded-full">
                 <svg 
@@ -100,8 +116,11 @@ export const GiftSection = () => {
 
           {/* Bank 2 */}
           <ScrollReveal delay={0.3} direction="right">
-            <motion.div whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}>
-              <Card className="p-8 shadow-soft hover:shadow-elegant transition-all bg-card border-border/50 h-full">
+            <motion.div whileHover={{ y: -5, transition: { duration: 0.3 } }}>
+              <Card className="elegant-card p-8 md:p-10 hover:shadow-elegant transition-all bg-card border-border/50 h-full relative overflow-hidden">
+                {/* Decorative corner accents */}
+                <div className="absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-primary/20" />
+                <div className="absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-primary/20" />
             <div className="text-center space-y-6">
               <div className="inline-block p-4 bg-rose-light rounded-full">
                 <svg 
@@ -151,8 +170,11 @@ export const GiftSection = () => {
         
         {/* Shipping Address - Full Width */}
         <ScrollReveal delay={0.4}>
-          <motion.div whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}>
-            <Card className="p-8 shadow-soft hover:shadow-elegant transition-all bg-card border-border/50">
+          <motion.div whileHover={{ y: -5, transition: { duration: 0.3 } }}>
+            <Card className="elegant-card p-8 md:p-10 hover:shadow-elegant transition-all bg-card border-border/50 relative overflow-hidden">
+              {/* Decorative corner accents */}
+              <div className="absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-secondary/20" />
+              <div className="absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-secondary/20" />
           <div className="text-center space-y-6">
             <div className="inline-block p-4 bg-sage-light rounded-full">
               <MapPin className="w-6 h-6 text-secondary" />

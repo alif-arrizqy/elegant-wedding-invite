@@ -6,6 +6,7 @@ import { GallerySection } from "@/components/GallerySection";
 import { RsvpSection } from "@/components/RsvpSection";
 import { GiftSection } from "@/components/GiftSection";
 import { Footer } from "@/components/Footer";
+import { DecorativeDivider } from "@/components/DecorativeDivider";
 
 const Index = () => {
   const [isOpen, setIsOpen] = useState(false);

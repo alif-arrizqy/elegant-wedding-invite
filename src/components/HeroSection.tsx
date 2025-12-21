@@ -106,28 +106,57 @@ export const HeroSection = ({ onOpenInvitation }: HeroSectionProps) => {
           initial="hidden"
           animate="visible"
         >
-          <motion.p 
+          <motion.div 
             variants={itemVariants}
-            className="text-lg md:text-xl font-sans text-foreground/80 mb-4 tracking-wide"
+            className="mb-6"
           >
-            THE WEDDING OF
-          </motion.p>
+            <p className="text-sm md:text-base font-sans text-foreground/70 mb-2 tracking-[0.3em] uppercase letter-spacing-wider">
+              Undangan Pernikahan
+            </p>
+            <div className="flex items-center justify-center gap-2">
+              <div className="w-6 h-px bg-primary/30" />
+              <svg className="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+              <div className="w-6 h-px bg-primary/30" />
+            </div>
+          </motion.div>
           
-          <motion.h1 
-            variants={itemVariants}
-            className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-foreground mb-6 leading-tight"
-          >
-            {HeroSectionData.groomName} & {HeroSectionData.brideName}
-          </motion.h1>
+          <motion.div variants={itemVariants} className="mb-6">
+            <h1 className="font-script text-6xl md:text-8xl lg:text-9xl text-foreground leading-none mb-4">
+              {HeroSectionData.groomName}
+            </h1>
+            <div className="flex items-center justify-center gap-3 my-4">
+              <div className="w-12 md:w-16 h-px bg-gradient-to-r from-transparent via-accent to-transparent" />
+              <motion.div
+                animate={{ rotate: [0, 10, -10, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <svg className="w-6 h-6 md:w-8 md:h-8 text-accent" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+              </motion.div>
+              <div className="w-12 md:w-16 h-px bg-gradient-to-r from-transparent via-accent to-transparent" />
+            </div>
+            <h1 className="font-script text-6xl md:text-8xl lg:text-9xl text-foreground leading-none">
+              {HeroSectionData.brideName}
+            </h1>
+          </motion.div>
           
           <motion.div 
             variants={itemVariants}
-            className="w-24 h-px bg-accent mx-auto mb-8" 
-          />
+            className="flex items-center justify-center gap-2 mb-8"
+          >
+            <div className="w-8 h-px bg-primary/50" />
+            <div className="w-2 h-2 rounded-full bg-accent" />
+            <div className="w-16 md:w-24 h-px bg-primary/50" />
+            <div className="w-2 h-2 rounded-full bg-accent" />
+            <div className="w-8 h-px bg-primary/50" />
+          </motion.div>
           
           <motion.p 
             variants={itemVariants}
-            className="text-xl md:text-2xl font-sans text-foreground/70 mb-8"
+            className="text-xl md:text-2xl lg:text-3xl font-serif italic text-foreground/80 mb-8 tracking-wide"
           >
             {HeroSectionData.weddingDate}
           </motion.p>

@@ -40,13 +40,13 @@ export const CoupleSection = () => {
               whileHover={{ y: -5 }}
               transition={{ duration: 0.3 }}
             >
+
               {/* Name and details */}
               <div className="space-y-4 max-w-xs">
                 <div className="relative inline-block">
                   <h3 className="font-script text-4xl md:text-5xl font-semibold text-foreground relative z-10">
                     {CoupleSectionData.groom.name}
                   </h3>
-                  {/* <div className="absolute -bottom-1 left-0 right-0 h-2 bg-primary/20 -z-0" /> */}
                 </div>
                 <p className="text-sm md:text-base text-muted-foreground font-sans leading-relaxed">
                   {CoupleSectionData.groom.detail}
@@ -109,13 +109,13 @@ export const CoupleSection = () => {
               whileHover={{ y: -5 }}
               transition={{ duration: 0.3 }}
             >
+
               {/* Name and details */}
               <div className="space-y-4 max-w-xs">
                 <div className="relative inline-block">
                   <h3 className="font-script text-4xl md:text-5xl font-semibold text-foreground relative z-10">
                     {CoupleSectionData.bride.name}
                   </h3>
-                  {/* <div className="absolute -bottom-1 left-0 right-0 h-2 bg-primary/20 -z-0" /> */}
                 </div>
                 <p className="text-sm md:text-base text-muted-foreground font-sans leading-relaxed">
                   {CoupleSectionData.bride.detail}

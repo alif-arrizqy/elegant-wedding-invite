@@ -12,7 +12,7 @@ export const HeroSectionData = {
     groomName: "Haikal",
     brideName: "Dania",
     weddingDate: "04 Januari 2026",
-    countDownWeddingDate: new Date("2026-01-01T09:00:00"),
+    countDownWeddingDate: new Date("2026-01-04T09:00:00"),
 };
 
 // Mempelai section data

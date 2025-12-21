@@ -4,8 +4,8 @@ import gallery3 from "@/assets/gallery-3.jpg";
 import gallery4 from "@/assets/gallery-4.jpg";
 import gallery5 from "@/assets/gallery-5.jpg";
 import gallery6 from "@/assets/gallery-6.jpg";
-import groomImage from "@/assets/groom.jpg";
-import brideImage from "@/assets/bride.jpg";
+import groomImage from "@/assets/groom.png";
+import brideImage from "@/assets/bride.png";
 
 // Hero section data
 export const HeroSectionData = {
@@ -44,13 +44,13 @@ export const EventSectionData = {
         date: "Minggu, 04 Januari 2026",
         time: "09.00 - 10.00 WIB",
         location: "Dojo Kyoto Kota Wisata",
-        mapUrl: "https://share.google/8TQpDnWfdtCDeW8V5",
+        mapUrl: "https://maps.app.goo.gl/f2oWnr99wgaU3QoQ9",
     },
     resepsi: {
         date: "Minggu, 04 Januari 2026",
         time: "11.00 - 14.00 WIB",
         location: "Dojo Kyoto Kota Wisata",
-        mapUrl: "https://share.google/8TQpDnWfdtCDeW8V5",
+        mapUrl: "https://maps.app.goo.gl/f2oWnr99wgaU3QoQ9",
     },
 };
 

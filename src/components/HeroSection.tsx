@@ -17,6 +17,7 @@ interface TimeLeft {
 
 export const HeroSection = ({ onOpenInvitation }: HeroSectionProps) => {
   const [guestName, setGuestName] = useState<string>("");
+  const [isMobile, setIsMobile] = useState<boolean>(false);
   const weddingDate = HeroSectionData.countDownWeddingDate.getTime();
   
   // Get guest name dari URL query parameter
@@ -28,6 +29,17 @@ export const HeroSection = ({ onOpenInvitation }: HeroSectionProps) => {
       const decodedName = decodeURIComponent(guest).replace(/-/g, ' ', ).replace(/\b\w/g, c => c.toUpperCase());
       setGuestName(decodedName);
     }
+  }, []);
+
+  // Detect mobile screen size
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
   
   const calculateTimeLeft = useCallback((): TimeLeft => {
@@ -95,8 +107,13 @@ export const HeroSection = ({ onOpenInvitation }: HeroSectionProps) => {
 
   return (
     <section 
-      className="relative min-h-screen flex items-center justify-center bg-cover bg-center"
-      style={{ backgroundImage: `url(${heroBackground})` }}
+      className="relative min-h-screen flex items-center justify-center bg-center bg-no-repeat"
+      style={{ 
+        backgroundImage: `url(${heroBackground})`,
+        backgroundSize: isMobile ? '110%' : 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
     >
       <div className="absolute inset-0 bg-gradient-overlay" />
       
